@@ -26,7 +26,7 @@ python box_maker.py <start_x>
                     <height>
                     <last_vertex_id_in_3d_space>
 
-- "Start x, y, z" values are the first vertex of the box (rectangular parallelpiped). 
+- "Start x, y, z" values are the first vertex of the box (rectangular parallelpiped). According to visuals provided, vertex with number 1.
 - "Length" states distance between to edges of rectangle in X coordinates.
 - "Width" states distance between to edges of rectangle in Z coordinates.
 - "Height" states distance between to edges of rectangle in Y coordinates.
@@ -42,6 +42,13 @@ python star_maker.py <star_center_x>
                     <start_x>
                     <start_y>
                     <last_vertex_id_in_3d_space>
+
+- "Star center x, y" values are the central vertex of the star. According to visuals provided, vertex with number 11.
+- "Star z coordinate" states common Z coordinate that all points on the star has. This for generating flat surface along XY axis.
+- "Star back distance" states distance central vertex of the star and a point on the back that converts this star to a comet.
+- "Start x, y" values are the first vertex of the star. Top of the star; in other words, edge that points to upward direction. According to visuals provided, vertex with number 1.
+- "Last vertex in 3d space" means that if there is another object in the 3d space before, it gives new vertex ids after the last vertex id of the previous object. If this is the first object you will add, last vertex in 3d space should be given as 0. Otherwise, give it as last vertex id of the lastly added object.
+
 
 Cone maker:
 
