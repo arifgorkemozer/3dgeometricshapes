@@ -70,8 +70,8 @@ python cone_maker.py <cone_bottom_center_x>
 - "Cone bottom radius" states radius of the round surface on the cone bottom.
 - "Step threshold" states the X distance between the vertices of the cone bottom. While generating round surface, many triangles are appended to each other to make it look like a round surface. If step threshold decreases and approaches to 0, you will get full circle.
 - "Last vertex in 3d space" means that if there is another object in the 3d space before, it gives new vertex ids after the last vertex id of the previous object. If this is the first object you will add, last vertex in 3d space should be given as 0. Otherwise, give it as last vertex id of the lastly added object.
-- "Color primary" states the color of the first vertex of a triangle on cone bottom. Optional parameter.
-- "Color secondary" states the color of the second vertex of a triangle on cone bottom. Optional parameter.
-- "Color bottom center" states the color of the central vertex on cone bottom. Vertices with color primary and color secondary connects to central vertex, making a small triangle. Optional parameter.
-- "Color top" states the color of the point on the back that converts this circle to a cone. Optional parameter.
+- "Color primary" states the color of the first vertex of a triangle on cone bottom. Optional parameter. Default red.
+- "Color secondary" states the color of the second vertex of a triangle on cone bottom. Optional parameter. Default blue.
+- "Color bottom center" states the color of the central vertex on cone bottom. Vertices with color primary and color secondary connects to central vertex, making a small triangle. Optional parameter. Default green.
+- "Color top" states the color of the point on the back that converts this circle to a cone. Optional parameter. Default cyan.
 
