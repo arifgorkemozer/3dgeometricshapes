@@ -16,9 +16,15 @@ by generating vertices in 3d space. In addition, these scripts also generate tri
 
 If you run scripts without an argument, they will fail and write a message that states arguments needed. However, it is better to show them here as well:
 
+Camera maker:
+
+>_ python camera_maker.py <camera_file_name>
+
+- "Camera file name" will be name of the output file, if ".txt" extension is not added, it generates it as "<camera_file_name>.txt"
+
 Box maker:
 
-python box_maker.py <start_x>
+>_ python box_maker.py <start_x>
                     <start_y>
                     <start_z>
                     <length>
@@ -33,7 +39,7 @@ python box_maker.py <start_x>
 - "Last vertex in 3d space" means that if there is another object in the 3d space before, it gives new vertex ids after the last vertex id of the previous object. If this is the first object you will add, last vertex in 3d space should be given as 0. Otherwise, give it as last vertex id of the lastly added object.
 
 
-Star maker:
+>_ Star maker:
 
 python star_maker.py <star_center_x>
                     <star_center_y>
@@ -50,7 +56,7 @@ python star_maker.py <star_center_x>
 - "Last vertex in 3d space" means that if there is another object in the 3d space before, it gives new vertex ids after the last vertex id of the previous object. If this is the first object you will add, last vertex in 3d space should be given as 0. Otherwise, give it as last vertex id of the lastly added object.
 
 
-Cone maker:
+>_ Cone maker:
 
 python cone_maker.py <cone_bottom_center_x>
                     <cone_bottom_center_y>
