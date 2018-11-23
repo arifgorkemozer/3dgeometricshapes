@@ -1,5 +1,7 @@
 
 # author: Gorkem Ozer
+# more info: https://github.com/arifgorkemozer/3dgeometricshapes/
+
 
 import sys
 
