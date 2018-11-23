@@ -16,15 +16,14 @@ else:
 
 	radius = (float)(sys.argv[5])
 	step_threshold = (float)(sys.argv[6])
-	base = (int)(sys.argv[7])
+	last_vertex_id = (int)(sys.argv[7])
 
 	color_primary = None
 	color_secondary = None
-	color_cone_bottom_center =  None
+	color_cone_bottom_center = None
 	color_cone_top = None
 
 	if len(sys.argv) == 12:
-
 		color_primary_values = sys.argv[8].split("|")
 		color_secondary_values = sys.argv[9].split("|")
 		color_bottom_values = sys.argv[10].split("|")
@@ -37,14 +36,14 @@ else:
 
 		color_primary = tuple(cpv)
 		color_secondary = tuple(csv)
-		color_cone_bottom_center =  tuple(cbv)
+		color_cone_bottom_center = tuple(cbv)
 		color_cone_top = tuple(ctv)
 
 	else:
 		
 		color_primary = (255, 0, 0)
 		color_secondary = (0, 0, 255)
-		color_cone_bottom_center =  (0, 255, 0)
+		color_cone_bottom_center = (0, 255, 0)
 		color_cone_top = (0, 255, 255)
 	
 
@@ -80,12 +79,12 @@ else:
 
 	# cone bottom triangles (to cone bottom center)
 	for i in range(1, front_last_vertex_id):
-		triangles.append( (front_center_id   +base,      i+1   +base,          i  +base) )
+		triangles.append( (front_center_id +last_vertex_id, i+1 +last_vertex_id, i +last_vertex_id) )
 
 
 	# cone side triangles (to cone top)
 	for i in range(1, front_last_vertex_id):
-		triangles.append( (back_center_id  +base,     i   +base,    i+1   +base )  )
+		triangles.append( (back_center_id +last_vertex_id, i +last_vertex_id, i+1 +last_vertex_id ) )
 
 
 	
@@ -114,3 +113,61 @@ else:
 
 	print len(points), "points created"
 	print len(triangles), "triangles created"
+
+	# write to a 3d scene file
+	with open("cone_scene.txt", 'w') as f:
+		
+		f.write("100 100 100")
+		f.write("\n")
+		f.write("1")
+		f.write("\n")
+		f.write("#Vertices")
+		f.write("\n")
+		f.write(str(len(points)))
+		f.write("\n")
+		f.write("#Colors")
+		f.write("\n")
+		
+		for c in colors:
+			f.write( str(c[0]) + " " + str(c[1]) + " " + str(c[2]))
+			f.write("\n")	
+
+
+		f.write("#Positions")
+		f.write("\n")
+
+		for elem in points:
+			f.write( str(elem[0]) + " " + str(elem[1]) + " " + str(elem[2]))
+			f.write("\n")
+
+		f.write("#Translations")
+		f.write("\n")
+		f.write("0")
+		f.write("\n")
+		f.write("#Scalings")
+		f.write("\n")
+		f.write("0")
+		f.write("\n")
+		f.write("#Rotations")
+		f.write("\n")
+		f.write("0")
+		f.write("\n")
+		f.write("#Models")
+		f.write("\n")
+		f.write("1")
+		f.write("\n")
+		f.write("1")
+		f.write("\n")
+		f.write("1")
+		f.write("\n")	
+		f.write("0")
+		f.write("\n")
+		f.write(str(len(triangles)))
+		f.write("\n")
+
+		for tri in triangles:
+			f.write( str(tri[0]) + " " + str(tri[1]) + " " + str(tri[2]))
+			f.write("\n")
+
+
+
