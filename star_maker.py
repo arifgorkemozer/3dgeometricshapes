@@ -5,6 +5,7 @@
 
 import math
 import sys
+from scene_writer import write_scene_to_file
 
 if len(sys.argv) < 8:
 	print "Usage: python star_maker.py <star_center_x>\n\t\t\t<star_center_y>\n\t\t\t<star_z_coord>\n\t\t\t<star_back_distance>\n\t\t\t<start_x>\n\t\t\t<start_y>\n\t\t\t<last_vertex_id_in_3d_space>"
@@ -63,8 +64,7 @@ else:
 	# back center
 	points.append( (center_x, center_y, common_coord - star_back_distance) )
 
-	print "num of points: ", len(points)
-	print "star coordinates are:"
+	edited_points = []
 
 	for elem in points:
 
@@ -78,182 +78,60 @@ else:
 		else:
 			b = elem[1]
 
-		print a, b, elem[2]
+		edited_points.append( (a, b, elem[2]) )
 
 
-	print "triangles are:"
+	triangles = []
 
 	# front triangles
-	print 1 +last_vertex_id, 6 +last_vertex_id, 10 +last_vertex_id
-	print 2 +last_vertex_id, 7 +last_vertex_id, 6 +last_vertex_id
-	print 3 +last_vertex_id, 8 +last_vertex_id, 7 +last_vertex_id
-	print 4 +last_vertex_id, 9 +last_vertex_id, 8 +last_vertex_id
-	print 5 +last_vertex_id, 10 +last_vertex_id, 9 +last_vertex_id
+	triangles.append(  (1 +last_vertex_id, 6 +last_vertex_id, 10 +last_vertex_id) )
+	triangles.append(  (2 +last_vertex_id, 7 +last_vertex_id, 6 +last_vertex_id) )
+	triangles.append(  (3 +last_vertex_id, 8 +last_vertex_id, 7 +last_vertex_id) )
+	triangles.append(  (4 +last_vertex_id, 9 +last_vertex_id, 8 +last_vertex_id) )
+	triangles.append(  (5 +last_vertex_id, 10 +last_vertex_id, 9 +last_vertex_id) )
 
-	print 11 +last_vertex_id, 10 +last_vertex_id, 6 +last_vertex_id
-	print 11 +last_vertex_id, 9 +last_vertex_id, 10 +last_vertex_id
-	print 11 +last_vertex_id, 8 +last_vertex_id, 9 +last_vertex_id
-	print 11 +last_vertex_id, 7 +last_vertex_id, 8 +last_vertex_id
-	print 11 +last_vertex_id, 6 +last_vertex_id, 7 +last_vertex_id
+	triangles.append(  (11 +last_vertex_id, 10 +last_vertex_id, 6 +last_vertex_id) )
+	triangles.append(  (11 +last_vertex_id, 9 +last_vertex_id, 10 +last_vertex_id) )
+	triangles.append(  (11 +last_vertex_id, 8 +last_vertex_id, 9 +last_vertex_id) )
+	triangles.append(  (11 +last_vertex_id, 7 +last_vertex_id, 8 +last_vertex_id) )
+	triangles.append(  (11 +last_vertex_id, 6 +last_vertex_id, 7 +last_vertex_id) )
 
 	# back triangles
 
-	print 1 +last_vertex_id, 10 +last_vertex_id, 12 +last_vertex_id
-	print 1 +last_vertex_id, 12 +last_vertex_id, 6 +last_vertex_id
-	print 5 +last_vertex_id, 12 +last_vertex_id, 10 +last_vertex_id
-	print 5 +last_vertex_id, 9 +last_vertex_id, 12 +last_vertex_id
-	print 4 +last_vertex_id, 12 +last_vertex_id, 9 +last_vertex_id
-	print 4 +last_vertex_id, 8 +last_vertex_id, 12 +last_vertex_id
-	print 3 +last_vertex_id, 12 +last_vertex_id, 8 +last_vertex_id
-	print 3 +last_vertex_id, 7 +last_vertex_id, 12 +last_vertex_id
-	print 2 +last_vertex_id, 12 +last_vertex_id, 7 +last_vertex_id
-	print 2 +last_vertex_id, 6 +last_vertex_id, 12 +last_vertex_id
-	print 1 +last_vertex_id, 12 +last_vertex_id, 6 +last_vertex_id
+	triangles.append(  (1 +last_vertex_id, 10 +last_vertex_id, 12 +last_vertex_id) )
+	triangles.append(  (1 +last_vertex_id, 12 +last_vertex_id, 6 +last_vertex_id) )
+	triangles.append(  (5 +last_vertex_id, 12 +last_vertex_id, 10 +last_vertex_id) )
+	triangles.append(  (5 +last_vertex_id, 9 +last_vertex_id, 12 +last_vertex_id) )
+	triangles.append(  (4 +last_vertex_id, 12 +last_vertex_id, 9 +last_vertex_id) )
+	triangles.append(  (4 +last_vertex_id, 8 +last_vertex_id, 12 +last_vertex_id) )
+	triangles.append(  (3 +last_vertex_id, 12 +last_vertex_id, 8 +last_vertex_id) )
+	triangles.append(  (3 +last_vertex_id, 7 +last_vertex_id, 12 +last_vertex_id) )
+	triangles.append(  (2 +last_vertex_id, 12 +last_vertex_id, 7 +last_vertex_id) )
+	triangles.append(  (2 +last_vertex_id, 6 +last_vertex_id, 12 +last_vertex_id) )
+	triangles.append(  (1 +last_vertex_id, 12 +last_vertex_id, 6 +last_vertex_id) )
 	
+	color_white = (255, 255, 255)
+	color_gray = (200, 200, 200)
+	color_black = (20, 20, 20)
 
-	print "colors are:"
+	colors = []
 
-	print "255 255 255"
-	print "255 255 255"
-	print "255 255 255"
-	print "255 255 255"
-	print "255 255 255"
+	colors.append(color_white)
+	colors.append(color_white)
+	colors.append(color_white)
+	colors.append(color_white)
+	colors.append(color_white)
 
-	print "200 200 200"
-	print "200 200 200"
-	print "200 200 200"
-	print "200 200 200"
-	print "200 200 200"
+	colors.append(color_gray)
+	colors.append(color_gray)
+	colors.append(color_gray)
+	colors.append(color_gray)
+	colors.append(color_gray)
 
-	print "255 255 255"
-	print "20 20 20"
+	colors.append(color_white)
+	colors.append(color_black)
 
-	# write to a 3d scene file
-	with open("star_scene.txt", 'w') as f:
-		
-		f.write("100 100 100")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("#Vertices")
-		f.write("\n")
-		f.write(str(len(points)))
-		f.write("\n")
-		f.write("#Colors")
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "200 200 200" )
-		f.write("\n")
-		f.write( "200 200 200" )
-		f.write("\n")
-		f.write( "200 200 200" )
-		f.write("\n")
-		f.write( "200 200 200" )
-		f.write("\n")
-		f.write( "200 200 200" )
-		f.write("\n")
-		f.write( "255 255 255" )
-		f.write("\n")
-		f.write( "20 20 20" )
-		f.write("\n")
-		f.write("#Positions")
-		f.write("\n")
-
-		for elem in points:
-
-			if elem[0] < 0.00001 and elem[0] > -0.00001:
-				a = 0
-			else:
-				a = elem[0]
-
-			if elem[1] < 0.00001 and elem[1] > -0.00001:
-				b = 0
-			else:
-				b = elem[1]
-
-			f.write( str(a) + " " + str(b) + " " + str(elem[2]) )
-			f.write("\n")
-
-		f.write("#Translations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Scalings")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Rotations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Models")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")	
-		f.write("0")
-		f.write("\n")
-		f.write("20")
-		f.write("\n")
-		
-		# front triangles
-		f.write( str(1 +last_vertex_id) + " " + str( 6 +last_vertex_id) + " " + str( 10 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(2 +last_vertex_id) + " " + str( 7 +last_vertex_id) + " " + str( 6 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(3 +last_vertex_id) + " " + str( 8 +last_vertex_id) + " " + str( 7 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(4 +last_vertex_id) + " " + str( 9 +last_vertex_id) + " " + str( 8 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(5 +last_vertex_id) + " " + str( 10 +last_vertex_id) + " " + str( 9 +last_vertex_id) )
-		f.write("\n")
-
-		f.write( str(11 +last_vertex_id) + " " + str( 10 +last_vertex_id) + " " + str( 6 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(11 +last_vertex_id) + " " + str( 9 +last_vertex_id) + " " + str( 10 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(11 +last_vertex_id) + " " + str( 8 +last_vertex_id) + " " + str( 9 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(11 +last_vertex_id) + " " + str( 7 +last_vertex_id) + " " + str( 8 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(11 +last_vertex_id) + " " + str( 6 +last_vertex_id) + " " + str( 7 +last_vertex_id) )
-		f.write("\n")
-
-		# back triangles
-
-		f.write( str(1 +last_vertex_id) + " " + str( 10 +last_vertex_id) + " " + str( 12 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(1 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 6 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(5 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 10 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(5 +last_vertex_id) + " " + str( 9 +last_vertex_id) + " " + str( 12 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(4 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 9 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(4 +last_vertex_id) + " " + str( 8 +last_vertex_id) + " " + str( 12 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(3 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 8 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(3 +last_vertex_id) + " " + str( 7 +last_vertex_id) + " " + str( 12 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(2 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 7 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(2 +last_vertex_id) + " " + str( 6 +last_vertex_id) + " " + str( 12 +last_vertex_id) )
-		f.write("\n")
-		f.write( str(1 +last_vertex_id) + " " + str( 12 +last_vertex_id) + " " + str( 6 +last_vertex_id) )
+	write_scene_to_file("star_scene.xml", edited_points, colors, triangles)
 
 
 

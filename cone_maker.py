@@ -4,6 +4,7 @@
 
 import math
 import sys
+from scene_writer import write_scene_to_file
 
 if len(sys.argv) < 8:
 	print "Usage: python cone_maker.py <cone_bottom_center_x>\n\t\t\t<cone_bottom_center_y>\n\t\t\t<cone_bottom_z_coord>\n\t\t\t<cone_top_distance>\n\t\t\t<cone_bottom_radius>\n\t\t\t<step_threshold>\n\t\t\t<last_vertex_id_in_3d_space>\n\t\t\t<color_primary: \"R|G|B\">\n\t\t\t<color_secondary: \"R|G|B\">\n\t\t\t<color_bottom_center: \"R|G|B\">\n\t\t\t<color_top: \"R|G|B\">"
@@ -24,6 +25,11 @@ else:
 	color_cone_bottom_center = None
 	color_cone_top = None
 
+	color_red = (255, 0, 0)
+	color_green = (0, 255, 0)
+	color_blue = (0, 0, 255)
+	color_cyan = (0, 255, 255)
+
 	if len(sys.argv) == 12:
 		color_primary_values = sys.argv[8].split("|")
 		color_secondary_values = sys.argv[9].split("|")
@@ -42,10 +48,10 @@ else:
 
 	else:
 		
-		color_primary = (255, 0, 0)
-		color_secondary = (0, 0, 255)
-		color_cone_bottom_center = (0, 255, 0)
-		color_cone_top = (0, 255, 255)
+		color_primary = color_red
+		color_secondary = color_blue
+		color_cone_bottom_center = color_green
+		color_cone_top = color_cyan
 	
 
 	x = -radius
@@ -99,76 +105,7 @@ else:
 	colors.append(color_cone_bottom_center)
 	colors.append(color_cone_top)
 
-
-	print "Colors:"
-	for c in colors:
-		print c[0], c[1], c[2]
-
-	print "Positions:", len(points)
-	for elem in points:
-		print elem[0], elem[1], elem[2]
-
-	print "Triangles:", len(triangles)
-	for tri in triangles:
-		print tri[0], tri[1], tri[2]
-
-	print len(points), "points created"
-	print len(triangles), "triangles created"
-
-	# write to a 3d scene file
-	with open("cone_scene.txt", 'w') as f:
-		
-		f.write("100 100 100")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("#Vertices")
-		f.write("\n")
-		f.write(str(len(points)))
-		f.write("\n")
-		f.write("#Colors")
-		f.write("\n")
-		
-		for c in colors:
-			f.write( str(c[0]) + " " + str(c[1]) + " " + str(c[2]))
-			f.write("\n")	
-
-
-		f.write("#Positions")
-		f.write("\n")
-
-		for elem in points:
-			f.write( str(elem[0]) + " " + str(elem[1]) + " " + str(elem[2]))
-			f.write("\n")
-
-		f.write("#Translations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Scalings")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Rotations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Models")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")	
-		f.write("0")
-		f.write("\n")
-		f.write(str(len(triangles)))
-		f.write("\n")
-
-		for tri in triangles:
-			f.write( str(tri[0]) + " " + str(tri[1]) + " " + str(tri[2]))
-			f.write("\n")
+	write_scene_to_file("cone_scene.xml", points, colors, triangles)
 
 
 
