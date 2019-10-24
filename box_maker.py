@@ -6,165 +6,126 @@
 import sys
 
 if len(sys.argv) < 8:
-	print "Usage: python box_maker.py <start_x>\n\t\t\t<start_y>\n\t\t\t<start_z>\n\t\t\t<length>\n\t\t\t<width>\n\t\t\t<height>\n\t\t\t<last_vertex_id_3d_space>"
+	print 'Usage: python box_maker.py <start_x>\n\t\t\t<start_y>\n\t\t\t<start_z>\n\t\t\t<length>\n\t\t\t<width>\n\t\t\t<height>\n\t\t\t<last_vertex_id_3d_space>'
 
 else:
 	
-	x1 = (float)(sys.argv[1])
-	y1 = (float)(sys.argv[2])
-	z1 = (float)(sys.argv[3])
+	start_x = (float)(sys.argv[1])
+	start_y = (float)(sys.argv[2])
+	start_z = (float)(sys.argv[3])
 
-	l = (int) (sys.argv[4])
-	w = (int) (sys.argv[5])
-	h = (int) (sys.argv[6])
+	length = (float) (sys.argv[4])
+	width = (float) (sys.argv[5])
+	height = (float) (sys.argv[6])
 	last_vertex_id = (int) (sys.argv[7])
 
+	color_red = (255, 0, 0)
+	color_green = (0, 255, 0)
+	color_blue = (0, 0, 255)
+	color_cyan = (0, 255, 255)
 
-	first = (x1, y1, z1)
-	points = [first]
+	points = [] 	# contains vertex positions
+	colors = []		# contains vertex colors
+	triangles = []	# contains triangles, each represented with 3 vertex ids
 
-	#2nd
-	points.append( (first[0] , first[1] - h , first[2]) )
+	# 1st vertex position
+	first = (start_x, start_y, start_z)
+	points.append( first )
+	colors.append( color_red )
 
-	#3rd
-	points.append( (first[0]+l , first[1] - h , first[2]) )
+	#2nd vertex position
+	points.append( (first[0] , first[1] - height , first[2]) )
+	colors.append( color_red )
 
-	#4th
-	points.append( (first[0]+l , first[1] , first[2]) )
+	#3rd vertex position
+	points.append( (first[0] + length , first[1] - height , first[2]) )
+	colors.append( color_green )
 
-	#5th
-	points.append( (first[0]+l , first[1] , first[2]-w) )
+	#4th vertex position
+	points.append( (first[0] + length , first[1] , first[2]) )
+	colors.append( color_green )
 
-	#6th
-	points.append( (first[0]+l , first[1] - h , first[2]-w) )
+	#5th vertex position
+	points.append( (first[0] + length , first[1] - height , first[2] - width) )
+	colors.append( color_blue )
 
-	#7th
-	points.append( (first[0] , first[1] , first[2]-w) )
-
-	#8th
-	points.append( (first[0] , first[1]-h , first[2]-w) )
-
-	print "------"
-	print "colors are:"
-	print "255 0 0"
-	print "255 0 0"
-	print "0 255 0"
-	print "0 255 0"
-	print "0 0 255"
-	print "0 0 255"
-	print "0 255 255"
-	print "0 255 255"
-
-	print "------"
-	print "8 vertices"
-	print "coordinates are:" 
-
-	for elem in points:
-		print elem[0], elem[1], elem[2]
-
-	print "------"
-	print "12 triangles"
-	print "triangles are:"
-
-	print 1+last_vertex_id, 2 + last_vertex_id, 3 + last_vertex_id
-	print 1+last_vertex_id, 3 + last_vertex_id, 4 + last_vertex_id
+	#6th vertex position
+	points.append( (first[0] + length , first[1] , first[2] - width) )
+	colors.append( color_blue )
 	
-	print 8+last_vertex_id, 3 + last_vertex_id, 2 + last_vertex_id
-	print 6+last_vertex_id, 3 + last_vertex_id, 8 + last_vertex_id
+	#7th vertex position
+	points.append( (first[0] , first[1] , first[2] - width) )
+	colors.append( color_cyan )
 
-	print 4+last_vertex_id, 3 + last_vertex_id, 6 + last_vertex_id
-	print 4+last_vertex_id, 6 + last_vertex_id, 5 + last_vertex_id
+	#8th vertex position
+	points.append( (first[0] , first[1] - height , first[2] - width) )
+	colors.append( color_cyan )
 
-	print 5+last_vertex_id, 6 + last_vertex_id, 8 + last_vertex_id
-	print 5+last_vertex_id, 8 + last_vertex_id, 7 + last_vertex_id
+	"""
+		Triangles should be:
 
-	print 7+last_vertex_id, 1 + last_vertex_id, 4 + last_vertex_id
-	print 7+last_vertex_id, 4 + last_vertex_id, 5 + last_vertex_id
+		Front: 1-2-3, 1-3-4
+		Bottom: 8-3-2, 5-3-8
+		Right Side: 4-3-5, 4-5-6
+		Back: 6-5-8, 6-8-7
+		Top: 7-1-4, 7-4-6
+		Left Side: 7-2-1, 7-8-2
+	"""
+
+	# front
+	triangles.append( (1 + last_vertex_id , 2 + last_vertex_id, 3 + last_vertex_id ) )
+	triangles.append( (1 + last_vertex_id , 3 + last_vertex_id, 4 + last_vertex_id ) )
 	
-	print 7+last_vertex_id, 2 + last_vertex_id, 1 + last_vertex_id
-	print 7+last_vertex_id, 8 + last_vertex_id, 2 + last_vertex_id
+	# bottom
+	triangles.append( (8 + last_vertex_id , 3 + last_vertex_id, 2 + last_vertex_id ) )
+	triangles.append( (5 + last_vertex_id , 3 + last_vertex_id, 8 + last_vertex_id ) )
+	
+	# right side
+	triangles.append( (4 + last_vertex_id , 3 + last_vertex_id, 5 + last_vertex_id ) )
+	triangles.append( (4 + last_vertex_id , 5 + last_vertex_id, 6 + last_vertex_id ) )
+	
+	# back
+	triangles.append( (6 + last_vertex_id , 5 + last_vertex_id, 8 + last_vertex_id ) )
+	triangles.append( (6 + last_vertex_id , 8 + last_vertex_id, 7 + last_vertex_id ) )
+	
+	# top
+	triangles.append( (7 + last_vertex_id , 1 + last_vertex_id, 4 + last_vertex_id ) )
+	triangles.append( (7 + last_vertex_id , 4 + last_vertex_id, 6 + last_vertex_id ) )
 
+	# left side
+	triangles.append( (7 + last_vertex_id , 2 + last_vertex_id, 1 + last_vertex_id ) )
+	triangles.append( (7 + last_vertex_id , 8 + last_vertex_id, 2 + last_vertex_id ) )
 
-	# write to a 3d scene file
-	with open("box_scene.txt", 'w') as f:
 		
-		f.write("100 100 100")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("#Vertices")
-		f.write("\n")
-		f.write("8")
-		f.write("\n")
-		f.write("#Colors")
-		f.write("\n")
-		f.write( "255 0 0")
-		f.write("\n")
-		f.write( "255 0 0")
-		f.write("\n")
-		f.write( "0 255 0")
-		f.write("\n")
-		f.write( "0 255 0")
-		f.write("\n")
-		f.write( "0 0 255")
-		f.write("\n")
-		f.write( "0 0 255")
-		f.write("\n")
-		f.write( "0 255 255")
-		f.write("\n")
-		f.write( "0 255 255")
-		f.write("\n")
-		f.write("#Positions")
-		f.write("\n")
+	with open('box_scene.xml', 'w') as out_file:
 
-		for elem in points:
-			f.write( str(elem[0]) + " " + str(elem[1]) + " " + str(elem[2]))
-			f.write("\n")
+		
 
-		f.write("#Translations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Scalings")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Rotations")
-		f.write("\n")
-		f.write("0")
-		f.write("\n")
-		f.write("#Models")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")
-		f.write("1")
-		f.write("\n")	
-		f.write("0")
-		f.write("\n")
-		f.write("12")
-		f.write("\n")
-		f.write( str(1+last_vertex_id) + " " + str(2 + last_vertex_id) + " " + str(3 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(1+last_vertex_id) + " " + str(3 + last_vertex_id) + " " + str(4 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(8+last_vertex_id) + " " + str(3 + last_vertex_id) + " " + str(2 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(6+last_vertex_id) + " " + str(3 + last_vertex_id) + " " + str(8 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(4+last_vertex_id) + " " + str(3 + last_vertex_id) + " " + str(6 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(4+last_vertex_id) + " " + str(6 + last_vertex_id) + " " + str(5 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(5+last_vertex_id) + " " + str(6 + last_vertex_id) + " " + str(8 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(5+last_vertex_id) + " " + str(8 + last_vertex_id) + " " + str(7 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(7+last_vertex_id) + " " + str(1 + last_vertex_id) + " " + str(4 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(7+last_vertex_id) + " " + str(4 + last_vertex_id) + " " + str(5 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(7+last_vertex_id) + " " + str(2 + last_vertex_id) + " " + str(1 + last_vertex_id) )
-		f.write("\n")
-		f.write( str(7+last_vertex_id) + " " + str(8 + last_vertex_id) + " " + str(2 + last_vertex_id) )
+		out_file.write('<Vertices count="%d">\n' % len(points))
+
+		for i in range(0, len(points)):
+			out_file.write( '\t<Vertex id="%d" position="%s" color="%s" />\n' % (i+1, " ".join([str(elem) for elem in points[i]]), " ".join([str(elem) for elem in colors[i]]))  )
+
+		out_file.write("</Vertices>\n")
+
+		out_file.write('<Models count="1">\n')
+		out_file.write('\t<Model id="1" type="1">\n')
+
+		out_file.write('\t\t<Transformations count="0"></Transformations>\n')
+		out_file.write('\t\t<Triangles count="%d">\n' % len(triangles))
+
+		for i in range(0, len(triangles)):
+			out_file.write( '\t\t\t<Triangle id="%d">%s</Triangle>\n' % (i+1, " ".join([str(vertexId) for vertexId in triangles[i]]))  )
+
+		out_file.write("\t\t</Triangles>\n")
+		
+
+		out_file.write("\t</Model>\n")
+		out_file.write("</Models>\n")
+		
+		
+		
+		
+		
+		
+		
