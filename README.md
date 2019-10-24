@@ -32,6 +32,10 @@ If you run scripts without an argument, they will fail and write a message that 
 >                    <height>
 >                    <last_vertex_id_in_3d_space>
 
+> python box_maker.py 10 3 5 15 4 1.5 50
+
+will generate 8 vertices and 12 triangles. Vertex ids will be between 51-58.
+
 * "Start x, y, z" values are the first vertex of the box (rectangular parallelpiped). According to visuals provided, vertex with number 1.
 * "Length" states distance between to edges of rectangle in X coordinates.
 * "Width" states distance between to edges of rectangle in Z coordinates.
