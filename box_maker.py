@@ -104,23 +104,23 @@ else:
 		out_file.write('<Vertices count="%d">\n' % len(points))
 
 		for i in range(0, len(points)):
-			out_file.write( '\t<Vertex id="%d" position="%s" color="%s" />\n' % (i+1, " ".join([str(elem) for elem in points[i]]), " ".join([str(elem) for elem in colors[i]]))  )
+			out_file.write( '	<Vertex id="%d" position="%s" color="%s" />\n' % (i+1, " ".join([str(elem) for elem in points[i]]), " ".join([str(elem) for elem in colors[i]]))  )
 
 		out_file.write("</Vertices>\n")
 
 		out_file.write('<Models count="1">\n')
-		out_file.write('\t<Model id="1" type="1">\n')
+		out_file.write('	<Model id="1" type="1">\n')
 
-		out_file.write('\t\t<Transformations count="0"></Transformations>\n')
-		out_file.write('\t\t<Triangles count="%d">\n' % len(triangles))
+		out_file.write('		<Transformations count="0"></Transformations>\n')
+		out_file.write('		<Triangles count="%d">\n' % len(triangles))
 
 		for i in range(0, len(triangles)):
-			out_file.write( '\t\t\t<Triangle id="%d">%s</Triangle>\n' % (i+1, " ".join([str(vertexId) for vertexId in triangles[i]]))  )
+			out_file.write( '			<Triangle id="%d">%s</Triangle>\n' % (i+1, " ".join([str(vertexId) for vertexId in triangles[i]]))  )
 
-		out_file.write("\t\t</Triangles>\n")
+		out_file.write("		</Triangles>\n")
 		
 
-		out_file.write("\t</Model>\n")
+		out_file.write("	</Model>\n")
 		out_file.write("</Models>\n")
 		
 		

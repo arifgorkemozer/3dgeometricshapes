@@ -1,0 +1,16 @@
+<Cameras>
+	<Camera id="1">
+		<Position>0 0 100</Position>
+		<Gaze>0 0 -1</Gaze>
+		<Up>0 1 0</Up>
+		<ImagePlane>-1 1 -1 1 2 1000 1000 1000</ImagePlane>
+		<OutputName>camera_front.ppm</OutputName>
+	</Camera>
+	<Camera id="2">
+		<Position>0 100 0</Position>
+		<Gaze>0 -1 0</Gaze>
+		<Up>0 0 -1</Up>
+		<ImagePlane>-1 1 -1 1 2 1000 1000 1000</ImagePlane>
+		<OutputName>camera_top.ppm</OutputName>
+	</Camera>
+</Cameras>
