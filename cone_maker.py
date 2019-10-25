@@ -105,7 +105,7 @@ else:
 	colors.append(color_cone_bottom_center)
 	colors.append(color_cone_top)
 
-	write_scene_to_file("cone_scene.xml", points, colors, triangles)
+	write_scene_to_file("cone_scene.xml", points, colors, triangles, last_vertex_id)
 
 
 

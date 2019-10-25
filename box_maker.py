@@ -24,6 +24,9 @@ else:
 	color_green = (0, 255, 0)
 	color_blue = (0, 0, 255)
 	color_cyan = (0, 255, 255)
+	color_white = (255, 255, 255)
+	color_other = (220, 30, 53)
+	color_other2 = (2, 82, 156)
 
 	points = [] 	# contains vertex positions
 	colors = []		# contains vertex colors
@@ -32,19 +35,19 @@ else:
 	# 1st vertex position
 	first = (start_x, start_y, start_z)
 	points.append( first )
-	colors.append( color_red )
+	colors.append( color_other )
 
 	#2nd vertex position
 	points.append( (first[0] , first[1] - height , first[2]) )
-	colors.append( color_red )
+	colors.append( color_other )
 
 	#3rd vertex position
 	points.append( (first[0] + length , first[1] - height , first[2]) )
-	colors.append( color_green )
+	colors.append( color_other )
 
 	#4th vertex position
 	points.append( (first[0] + length , first[1] , first[2]) )
-	colors.append( color_green )
+	colors.append( color_other )
 
 	#5th vertex position
 	points.append( (first[0] + length , first[1] - height , first[2] - width) )
@@ -98,7 +101,7 @@ else:
 	triangles.append( (7 + last_vertex_id , 8 + last_vertex_id, 2 + last_vertex_id ) )
 
 		
-	write_scene_to_file("box_scene.xml", points, colors, triangles)
+	write_scene_to_file("box_scene.xml", points, colors, triangles, last_vertex_id)
 		
 		
 		

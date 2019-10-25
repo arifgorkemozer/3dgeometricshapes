@@ -131,7 +131,7 @@ else:
 	colors.append(color_white)
 	colors.append(color_black)
 
-	write_scene_to_file("star_scene.xml", edited_points, colors, triangles)
+	write_scene_to_file("star_scene.xml", edited_points, colors, triangles, last_vertex_id)
 
 
 

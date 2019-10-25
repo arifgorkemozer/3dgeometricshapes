@@ -1,12 +1,12 @@
 
 
 
-def write_scene_to_file(filename, points, colors, triangles):
+def write_scene_to_file(filename, points, colors, triangles, last_vertex_id):
     with open(filename, 'w') as out_file:
 		out_file.write('<Vertices count="%d">\n' % len(points))
 
 		for i in range(0, len(points)):
-			out_file.write( '	<Vertex id="%d" position="%s" color="%s" />\n' % (i+1, " ".join([str(elem) for elem in points[i]]), " ".join([str(elem) for elem in colors[i]]))  )
+			out_file.write( '	<Vertex id="%d" position="%s" color="%s" />\n' % (last_vertex_id+i+1, " ".join([str(elem) for elem in points[i]]), " ".join([str(elem) for elem in colors[i]]))  )
 
 		out_file.write("</Vertices>\n")
 
@@ -17,7 +17,7 @@ def write_scene_to_file(filename, points, colors, triangles):
 		out_file.write('		<Triangles count="%d">\n' % len(triangles))
 
 		for i in range(0, len(triangles)):
-			out_file.write( '			<Triangle id="%d">%s</Triangle>\n' % (i+1, " ".join([str(vertexId) for vertexId in triangles[i]]))  )
+			out_file.write( '			<Triangle>%s</Triangle>\n' % (" ".join([str(vertexId) for vertexId in triangles[i]]))  )
 
 		out_file.write("		</Triangles>\n")
 		
